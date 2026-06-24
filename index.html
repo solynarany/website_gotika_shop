@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloodMary | Готическая одежда</title>
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;600&family=Cinzel:wght@300;400&family=IM+Fell+English+SC&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Основные стили -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Декоративный фон -->
+    <div class="bg-video">
+        <div class="bg-overlay"></div>
+    </div>
+
+    <!-- ========== ШАПКА САЙТА ========== -->
+    <header class="header">
+        <div class="container">
+            <!-- Логотип -->
+            <div class="logo">
+                <div class="logo-icon">✝</div>
+                <div class="logo-text">
+                    <div class="logo-main">GOTIKA</div>
+                    <div class="logo-sub">готическая одежда</div>
+                </div>
+            </div>
+            
+            <!-- Навигация -->
+            <nav class="nav">
+                <a href="#collection" class="nav-link active" onclick="filterProductsByCategory('all'); return false;">Коллекции</a>
+                <a href="#collection" class="nav-link" onclick="filterProductsByCategory('dresses'); return false;">Платья</a>
+                <a href="#collection" class="nav-link" onclick="filterProductsByCategory('suits'); return false;">Костюмы</a>
+                <a href="#collection" class="nav-link" onclick="filterProductsByCategory('shoes'); return false;">Обувь</a>
+                <a href="#collection" class="nav-link" onclick="filterProductsByCategory('accessories'); return false;">Аксессуары</a>
+                <a href="#contacts" class="nav-link" onclick="scrollToContacts(); return false;">Контакты</a>
+            </nav>
+            
+            <!-- Действия -->
+            <div class="header-actions">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Найти в тенях...">
+                </div>
+                <button class="icon-btn" id="cart-btn">
+                    <i class="fas fa-shopping-basket"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="icon-btn" id="user-btn">
+                    <i class="fas fa-ghost"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== ОСНОВНОЙ КОНТЕНТ ========== -->
+    <main>
+        <!-- ГЛАВНЫЙ БАННЕР -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-tagline">
+                        <span class="cross">✝</span> ГОТИЧЕСКАЯ ОДЕЖДА
+                    </div>
+                    <h1 class="hero-title">GOTIKA</h1>
+                    <p class="hero-subtitle">Коллекция 2026. Сумерки воплощённые в ткани.</p>
+                    <div class="hero-actions">
+                        <a href="#collection" class="btn btn-primary">
+                            <i class="fas fa-arrow-down"></i> К коллекции
+                        </a>
+                        <a href="#collection" class="btn btn-secondary">
+                            <i class="fas fa-book"></i> Полный каталог
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="forest-bg"></div>
+            <div class="fog-overlay"></div>
+        </section>
+
+        <!-- КОЛЛЕКЦИЯ ТОВАРОВ -->
+        <section id="collection" class="collection-section">
+            <div class="container">
+                <!-- Заголовок секции -->
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="title-decor left">┏┫</span>
+                        <span class="title-text">КОЛЛЕКЦИЯ</span>
+                        <span class="title-decor right">┣┓</span>
+                    </h2>
+                    <p class="section-subtitle">Darkwave / Elegance / Mystique</p>
+                    
+                    <!-- Специальные фильтры -->
+                    <div class="filters">
+                        <button class="filter-btn" data-filter="vampire">
+                            <i class="fas fa-moon"></i> VAMPIRE
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Фильтры по категориям -->
+                <div class="category-filters" id="category-filters">
+                    <h3 class="category-filters-title">
+                        <i class="fas fa-filter"></i> КАТЕГОРИИ ТОВАРОВ
+                    </h3>
+                    
+                    <div class="filter-buttons">
+                        <button class="category-filter-btn active" data-category="all">
+                            <i class="fas fa-globe"></i> Все товары
+                        </button>
+                        <button class="category-filter-btn" data-category="dresses">
+                            <i class="fas fa-chess-queen"></i> Платья
+                        </button>
+                        <button class="category-filter-btn" data-category="corsets">
+                            <i class="fas fa-vest"></i> Корсеты
+                        </button>
+                        <button class="category-filter-btn" data-category="coats">
+                            <i class="fas fa-coat"></i> Плащи
+                        </button>
+                        <button class="category-filter-btn" data-category="suits">
+                            <i class="fas fa-user-tie"></i> Костюмы
+                        </button>
+                        <button class="category-filter-btn" data-category="shoes">
+                            <i class="fas fa-shoe-prints"></i> Обувь
+                        </button>
+                        <button class="category-filter-btn" data-category="accessories">
+                            <i class="fas fa-ring"></i> Аксессуары
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Сетка товаров -->
+                <div class="products-grid" id="products-container">
+                    <!-- Скелетоны загрузки -->
+                    <div class="product-skeleton">
+                        <div class="skeleton-image"></div>
+                        <div class="skeleton-title"></div>
+                        <div class="skeleton-price"></div>
+                    </div>
+                    <div class="product-skeleton">
+                        <div class="skeleton-image"></div>
+                        <div class="skeleton-title"></div>
+                        <div class="skeleton-price"></div>
+                    </div>
+                    <div class="product-skeleton">
+                        <div class="skeleton-image"></div>
+                        <div class="skeleton-title"></div>
+                        <div class="skeleton-price"></div>
+                    </div>
+                </div>
+                
+                <!-- Блок с преимуществами -->
+                <div class="features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <h3>Только ночью</h3>
+                        <p>Доставляем в тёмное время суток</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-hand-sparkles"></i>
+                        </div>
+                        <h3>Ручная работа</h3>
+                        <p>Каждый предмет создан с душой</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-book-spells"></i>
+                        </div>
+                        <h3>Секреты алхимии</h3>
+                        <p>Особые материалы и технологии</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h3>Эликсиры в подарок</h3>
+                        <p>К каждому заказу - магический сюрприз</p>
+                    </div>
+                </div>
+                
+                <!-- Отладочная информация о корзине -->
+                <div class="cart-debug" style="text-align: center; margin: 30px 0;">
+                    <button id="clear-cart" class="btn btn-secondary">
+                        <i class="fas fa-trash"></i> Очистить корзину
+                    </button>
+                    <div class="cart-info">
+                        Товаров в корзине: <span id="cart-total-items">0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ КОНТАКТОВ -->
+        <section id="contacts" class="contacts-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="title-decor left">┏┫</span>
+                        <span class="title-text">КОНТАКТЫ</span>
+                        <span class="title-decor right">┣┓</span>
+                    </h2>
+                    <p class="section-subtitle">Свяжитесь с нами в тёмное время суток</p>
+                </div>
+                
+                <div class="contacts-grid">
+                    <!-- Контактная информация -->
+                    <div class="contacts-info">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Наше логово</h3>
+                                <p>Новочебоксарск, ул. Жени Крутовой, д. 34</p>
+                                <p class="contact-note">Вход только при полной луне</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Телефон крови</h3>
+                                <p>+7 (999) 666-13-13</p>
+                                <p class="contact-note">Активны с 13:00 до 21:00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Вампирская почта</h3>
+                                <p>darkness@gotika.ru</p>
+                                <p class="contact-note">Отвечаем в течение лунного цикла</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Часы явлений</h3>
+                                <p>Пн-Пт: 21:00 - 04:00</p>
+                                <p>Сб-Вс: 22:00 - 05:00</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Форма обратной связи -->
+                    <div class="contacts-form">
+                        <h3>Отправьте нам весточку</h3>
+                        <form id="contact-form">
+                            <div class="form-group">
+                                <input type="text" id="contact-name" placeholder="Ваше имя" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="email" id="contact-email" placeholder="Электронная почта" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <select id="contact-subject">
+                                    <option value="">Выберите тему</option>
+                                    <option value="order">Вопрос по заказу</option>
+                                    <option value="product">Вопрос о товаре</option>
+                                    <option value="size">Консультация по размеру</option>
+                                    <option value="other">Другое</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <textarea id="contact-message" rows="5" placeholder="Ваше сообщение..." required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" required>
+                                    <span>Я согласен(а) на контакт с потусторонними силами</span>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fas fa-paper-plane"></i> Отправить в темноту
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Карта (декоративная) -->
+                <div class="contact-map">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p>Тёмная карта нашего местоположения</p>
+                        <div class="map-overlay">
+                            <div class="map-marker">
+                                <i class="fas fa-cross"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========== ПОДВАЛ ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <div class="logo-symbol">†</div>
+                        <div class="logo-text">BLOODMARY</div>
+                        <div class="logo-sublogo">DIGITAL GOTHIC</div>
+                    </div>
+                    <div class="footer-tagline">
+                        холодная эстетика цифровой эпохи<br>
+                        since 2024
+                    </div>
+                    <div class="social-grid">
+                        <a href="#" class="social-icon vk"><i class="fab fa-vk"></i></a>
+                        <a href="#" class="social-icon tg"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-icon yt"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon sc"><i class="fab fa-soundcloud"></i></a>
+                        <a href="#" class="social-icon bandcamp"><i class="fab fa-bandcamp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>НАВИГАЦИЯ</h4>
+                    <a href="#">● COLLECTIONS</a>
+                    <a href="#">● LOOKBOOK</a>
+                    <a href="#">● ARCHIVE</a>
+                    <a href="#">● MIXTAPES</a>
+                    <a href="#">● EVENTS</a>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>КОНТАКТЫ</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> order@bloodmary.digital</p>
+                        <p><i class="fas fa-phone"></i> +7 (999) 666-13-13</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Moscow / Digital Space</p>
+                    </div>
+                    <div class="playlist">
+                        <div class="now-playing">
+                            <i class="fas fa-play"></i>
+                            <span>NOW PLAYING:</span>
+                        </div>
+                        <div class="track-info">
+                            ZAVET - GOTIKA (2024)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    © 2024 BLOODMARY DIGITAL GOTHIC
+                    <span class="separator">|</span>
+                    ALL RIGHTS RESERVED
+                    <span class="separator">|</span>
+                    CODE: GOTIKA_EDITION
+                </div>
+                <div class="tech-info">
+                    <span class="server-status">
+                        <span class="status-dot"></span>
+                        SERVER: ONLINE
+                    </span>
+                    <span class="visitors">VISITORS: 666</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== МОДАЛЬНЫЕ ОКНА ========== -->
+    
+    <!-- Корзина -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-basket"></i> Корзина</h3>
+            <button class="close-cart" id="close-cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Товары в корзине появятся здесь -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Итого:</span>
+                <span id="cart-total">0 ₽</span>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkout-btn">
+                <i class="fas fa-scroll"></i> Оформить заказ
+            </button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+    <!-- Оформление заказа -->
+    <div class="checkout-modal" id="checkout-modal">
+        <div class="checkout-overlay"></div>
+        <div class="checkout-content">
+            <button class="checkout-close">&times;</button>
+            
+            <div class="checkout-header">
+                <h3><i class="fas fa-shopping-cart"></i> Оформление заказа</h3>
+                <div class="order-progress">
+                    <div class="progress-step active" data-step="1">
+                        <span class="step-number">1</span>
+                        <span class="step-text">Данные</span>
+                    </div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step" data-step="2">
+                        <span class="step-number">2</span>
+                        <span class="step-text">Оплата</span>
+                    </div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step" data-step="3">
+                        <span class="step-number">3</span>
+                        <span class="step-text">Готово</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="checkout-body">
+                <!-- Шаг 1: Данные покупателя -->
+                <div class="checkout-step active" data-step="1">
+                    <div class="step-content">
+                        <h4><i class="fas fa-user-circle"></i> Ваши контактные данные</h4>
+                        
+                        <form id="checkout-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="customer-name">Имя и фамилия *</label>
+                                    <input type="text" id="customer-name" placeholder="Мария Иванова" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="customer-email">Email *</label>
+                                    <input type="email" id="customer-email" placeholder="maria@example.com" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="customer-phone">Телефон *</label>
+                                    <input type="tel" id="customer-phone" placeholder="+7 (999) 123-45-67" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="customer-city">Город *</label>
+                                    <select id="customer-city" required>
+                                        <option value="">Выберите город</option>
+                                        <option value="moscow">Москва</option>
+                                        <option value="spb">Санкт-Петербург</option>
+                                        <option value="ekb">Екатеринбург</option>
+                                        <option value="other">Другой город</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label for="customer-address">Адрес доставки *</label>
+                                    <textarea id="customer-address" rows="2" placeholder="Улица, дом, квартира" required></textarea>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label for="order-comment">Комментарий к заказу</label>
+                                    <textarea id="order-comment" rows="2" placeholder="Особые пожелания, время доставки и т.д."></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="step-actions">
+                                <button type="button" class="btn btn-secondary" onclick="closeCheckoutModal()">
+                                    Отмена
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="goToPaymentStep()">
+                                    Продолжить <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Шаг 2: Оплата -->
+                <div class="checkout-step" data-step="2">
+                    <div class="step-content">
+                        <h4><i class="fas fa-credit-card"></i> Выберите способ оплаты</h4>
+                        
+                        <div class="payment-methods">
+                            <div class="payment-method" data-method="card">
+                                <div class="method-radio">
+                                    <input type="radio" name="payment-method" id="card" checked>
+                                    <label for="card"></label>
+                                </div>
+                                <div class="method-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="method-info">
+                                    <h5>Банковская карта</h5>
+                                    <p>Visa, MasterCard, МИР</p>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-method" data-method="sbp">
+                                <div class="method-radio">
+                                    <input type="radio" name="payment-method" id="sbp">
+                                    <label for="sbp"></label>
+                                </div>
+                                <div class="method-icon">
+                                    <i class="fas fa-qrcode"></i>
+                                </div>
+                                <div class="method-info">
+                                    <h5>СБП (Сбербанк)</h5>
+                                    <p>Быстрый перевод</p>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-method" data-method="cash">
+                                <div class="method-radio">
+                                    <input type="radio" name="payment-method" id="cash">
+                                    <label for="cash"></label>
+                                </div>
+                                <div class="method-icon">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <div class="method-info">
+                                    <h5>Наличными</h5>
+                                    <p>При получении заказа</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="order-summary">
+                            <h5>Ваш заказ</h5>
+                            <div class="summary-items" id="checkout-items">
+                                <!-- Товары появятся здесь -->
+                            </div>
+                            <div class="summary-totals">
+                                <div class="total-row">
+                                    <span>Товары:</span>
+                                    <span id="items-total">0 ₽</span>
+                                </div>
+                                <div class="total-row">
+                                    <span>Доставка:</span>
+                                    <span id="delivery-price">500 ₽</span>
+                                </div>
+                                <div class="total-row grand-total">
+                                    <span>Итого к оплате:</span>
+                                    <span id="grand-total">0 ₽</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-note">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Это демо-версия оплаты. Деньги не списываются.</p>
+                        </div>
+                        
+                        <div class="step-actions">
+                            <button type="button" class="btn btn-secondary" onclick="goToPreviousStep()">
+                                <i class="fas fa-arrow-left"></i> Назад
+                            </button>
+                            <button type="button" class="btn btn-primary" id="process-payment-btn" onclick="processPayment()">
+                                <i class="fas fa-lock"></i> Оплатить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Шаг 3: Успешное оформление -->
+                <div class="checkout-step" data-step="3">
+                    <div class="step-content success-content">
+                        <div class="success-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        
+                        <h4>Заказ оформлен успешно!</h4>
+                        
+                        <div class="success-details">
+                            <div class="detail-card">
+                                <div class="detail-header">
+                                    <i class="fas fa-receipt"></i>
+                                    <span>Номер заказа</span>
+                                </div>
+                                <div class="detail-value" id="success-order-number">GOT-00000</div>
+                            </div>
+                            
+                            <div class="detail-card">
+                                <div class="detail-header">
+                                    <i class="fas fa-user"></i>
+                                    <span>Клиент</span>
+                                </div>
+                                <div class="detail-value" id="success-customer-name"></div>
+                            </div>
+                            
+                            <div class="detail-card">
+                                <div class="detail-header">
+                                    <i class="fas fa-phone"></i>
+                                    <span>Телефон</span>
+                                </div>
+                                <div class="detail-value" id="success-customer-phone"></div>
+                            </div>
+                            
+                            <div class="detail-card">
+                                <div class="detail-header">
+                                    <i class="fas fa-box"></i>
+                                    <span>Сумма заказа</span>
+                                </div>
+                                <div class="detail-value" id="success-order-total"></div>
+                            </div>
+                            
+                            <div class="detail-card">
+                                <div class="detail-header">
+                                    <i class="fas fa-truck"></i>
+                                    <span>Статус доставки</span>
+                                </div>
+                                <div class="detail-value status-processing">
+                                    <i class="fas fa-spinner fa-spin"></i> Формируется к отправке
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="success-message">
+                            <p><i class="fas fa-envelope"></i> Подтверждение заказа отправлено на вашу почту</p>
+                            <p><i class="fas fa-clock"></i> Ожидайте звонка от менеджера для уточнения деталей</p>
+                        </div>
+                        
+                        <div class="step-actions">
+                            <button type="button" class="btn btn-primary" onclick="completeOrderAndReturn()">
+                                <i class="fas fa-home"></i> Вернуться в магазин
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR код для СБП -->
+    <div class="qr-modal" id="qr-modal">
+        <div class="qr-overlay"></div>
+        <div class="qr-content">
+            <button class="qr-close">&times;</button>
+            
+            <div class="qr-header">
+                <i class="fas fa-qrcode"></i>
+                <h4>Оплата через СБП</h4>
+            </div>
+            
+            <div class="qr-body">
+                <div class="qr-code-display">
+                    <div class="qr-placeholder">
+                        <div class="qr-grid">
+                            <div class="qr-pattern"></div>
+                            <div class="qr-data">
+                                <div class="qr-logo">
+                                    <i class="fas fa-gem"></i>
+                                </div>
+                                <div class="qr-text">
+                                    GOTIKA STORE
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="qr-info">
+                        <p>Отсканируйте QR-код в приложении вашего банка</p>
+                        <div class="qr-amount">
+                            Сумма: <strong id="qr-amount">0 ₽</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="qr-actions">
+                    <button class="btn btn-secondary" onclick="closeQRModal()">
+                        Отмена
+                    </button>
+                    <button class="btn btn-primary" onclick="simulateSBPPayment()">
+                        <i class="fas fa-check"></i> Я оплатил(а)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно профиля -->
+    <div class="profile-modal" id="profile-modal">
+        <div class="profile-overlay"></div>
+        <div class="profile-content">
+            <button class="profile-close">&times;</button>
+            
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="profile-info">
+                    <h3>Мой профиль</h3>
+                    <p id="profile-email">Войдите или зарегистрируйтесь</p>
+                </div>
+            </div>
+            
+            <div class="profile-tabs">
+                <button class="tab-btn active" data-tab="orders">Мои заказы</button>
+                <button class="tab-btn" data-tab="profile">Личные данные</button>
+                <button class="tab-btn" data-tab="favorites">Избранное</button>
+            </div>
+            
+            <div class="profile-body">
+                <!-- Вкладка "Мои заказы" -->
+                <div class="profile-tab active" id="tab-orders">
+                    <div class="orders-header">
+                        <h4><i class="fas fa-history"></i> История заказов</h4>
+                        <button class="btn-small" onclick="clearOrderHistory()">
+                            <i class="fas fa-trash"></i> Очистить историю
+                        </button>
+                    </div>
+                    
+                    <div class="orders-list" id="orders-list">
+                        <div class="no-orders">
+                            <i class="fas fa-box-open"></i>
+                            <p>У вас еще нет заказов</p>
+                            <p class="small-text">Совершите первую покупку!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Вкладка "Личные данные" -->
+                <div class="profile-tab" id="tab-profile">
+                    <h4><i class="fas fa-user-edit"></i> Личные данные</h4>
+                    
+                    <form class="profile-form" id="profile-form">
+                        <div class="form-group">
+                            <label for="user-name">Имя и фамилия</label>
+                            <input type="text" id="user-name" placeholder="Введите ваше имя">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="user-email">Email</label>
+                            <input type="email" id="user-email" placeholder="Введите ваш email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="user-phone">Телефон</label>
+                            <input type="tel" id="user-phone" placeholder="+7 (999) 123-45-67">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="user-city">Город</label>
+                                <select id="user-city">
+                                    <option value="">Выберите город</option>
+                                    <option value="moscow">Москва</option>
+                                    <option value="spb">Санкт-Петербург</option>
+                                    <option value="ekb">Екатеринбург</option>
+                                    <option value="other">Другой город</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="user-birthday">Дата рождения</label>
+                                <input type="date" id="user-birthday">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="user-address">Адрес доставки</label>
+                            <textarea id="user-address" rows="2" placeholder="Улица, дом, квартира"></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="closeProfileModal()">
+                                Отмена
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Сохранить
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Вкладка "Избранное" -->
+                <div class="profile-tab" id="tab-favorites">
+                    <h4><i class="fas fa-heart"></i> Избранные товары</h4>
+                    
+                    <div class="favorites-list" id="favorites-list">
+                        <div class="no-favorites">
+                            <i class="fas fa-heart-broken"></i>
+                            <p>В избранном пока пусто</p>
+                            <p class="small-text">Добавляйте товары, нажимая на сердечко</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-footer">
+                <button class="btn btn-secondary btn-block" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Выйти
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== ДЕКОРАТИВНЫЕ ЭЛЕМЕНТЫ ========== -->
+    <div class="moon"></div>
+    
+    <div class="stars">
+        <div class="star" style="top:15%; left:10%; width:2px; height:2px; animation-delay:0s"></div>
+        <div class="star" style="top:25%; left:80%; width:3px; height:3px; animation-delay:1s"></div>
+        <div class="star" style="top:60%; left:30%; width:1px; height:1px; animation-delay:2s"></div>
+        <div class="star" style="top:70%; left:70%; width:2px; height:2px; animation-delay:3s"></div>
+        <div class="star" style="top:40%; left:50%; width:3px; height:3px; animation-delay:4s"></div>
+    </div>
+    
+    <div class="ice-crystals">
+        <div class="crystal" style="top:10%; left:20%; animation-delay:0s"></div>
+        <div class="crystal" style="top:30%; left:60%; animation-delay:5s"></div>
+        <div class="crystal" style="top:50%; left:40%; animation-delay:10s"></div>
+        <div class="crystal" style="top:80%; left:10%; animation-delay:15s"></div>
+        <div class="crystal" style="top:90%; left:80%; animation-delay:20s"></div>
+    </div>
+    
+    <div class="droplets"></div>
+    
+    <!-- Картина в старинной рамке -->
+    <div class="painting-frame">
+        <div class="painting-light"></div>
+        <div class="frame-outer">
+            <div class="frame-inner">
+                <div class="painting-canvas"></div>
+                <div class="frame-shine"></div>
+                <div class="frame-dust"></div>
+                
+                <div class="frame-corner tl"></div>
+                <div class="frame-corner tr"></div>
+                <div class="frame-corner bl"></div>
+                <div class="frame-corner br"></div>
+                
+                <div class="painting-signature">GOTIKA</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== СКРИПТЫ ========== -->
+    <script src="data.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
