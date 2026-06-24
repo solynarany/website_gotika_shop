@@ -19,11 +19,12 @@
 Клонируйте репозиторий:
 
 Bash
-git clone [https://github.com/ВАШ_НИКНЕЙМ/gotika-fashion-shop.git](https://github.com/ВАШ_НИКНЕЙМ/gotika-fashion-shop.git)
+git clone [https://github.com/ВАШ_НИКНЕЙМ/gotika-fashion-shop.git](https://github.com/solynarany/gotika-fashion-shop.git)
 Перейдите в папку проекта:
 
 Bash
 cd gotika-fashion-shop
+Распакуйте папки images и modules
 Запустите проект:
 
 Если вы используете Visual Studio Code, установите расширение Live Server, нажмите правой кнопкой мыши на файл index.html и выберите "Open with Live Server".
